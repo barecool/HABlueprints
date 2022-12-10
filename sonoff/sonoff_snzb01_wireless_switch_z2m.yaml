@@ -29,7 +29,7 @@ blueprint:
       default: []
       selector:
         action: {}
-  source_url: https://github.com/barecool/HABlueprints/sonoff/sonoff_snzb01_wireless_switch_z2m.yaml
+  source_url: https://github.com/barecool/HABlueprints/blob/main/sonoff/sonoff_snzb01_wireless_switch_z2m.yaml
 mode: restart
 max_exceeded: silent
 trigger:

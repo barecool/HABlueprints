@@ -22,7 +22,7 @@ blueprint:
       default: []
       selector:
         action: {}
-  source_url: https://github.com/barecool/HABlueprints/zwavejs/ge_all_zwavejs.yaml
+  source_url: https://github.com/barecool/HABlueprints/blob/main/zwavejs/ge_all_zwavejs.yaml
 mode: single
 max_exceeded: silent
 trigger:
