@@ -1,0 +1,183 @@
+blueprint:
+  name: Zigbee Multi-Button Controller
+  description: Control various devices using a Zigbee device with four buttons, each supporting single, double, triple click, and hold actions.
+  domain: automation
+  input:
+    zigbee_device:
+      name: Zigbee Device
+      description: The Zigbee device to use
+      selector:
+        device:
+          integration: zha
+    button_1_single_click_action:
+      name: Button 1 Single Click Action
+      description: Action for Button 1 single click
+      selector:
+        action: {}
+    button_1_double_click_action:
+      name: Button 1 Double Click Action
+      description: Action for Button 1 double click
+      selector:
+        action: {}
+    button_1_triple_click_action:
+      name: Button 1 Triple Click Action
+      description: Action for Button 1 triple click
+      selector:
+        action: {}
+    button_1_hold_action:
+      name: Button 1 Hold Action
+      description: Action for Button 1 hold
+      selector:
+        action: {}
+    button_2_single_click_action:
+      name: Button 2 Single Click Action
+      description: Action for Button 2 single click
+      selector:
+        action: {}
+    button_2_double_click_action:
+      name: Button 2 Double Click Action
+      description: Action for Button 2 double click
+      selector:
+        action: {}
+    button_2_triple_click_action:
+      name: Button 2 Triple Click Action
+      description: Action for Button 2 triple click
+      selector:
+        action: {}
+    button_2_hold_action:
+      name: Button 2 Hold Action
+      description: Action for Button 2 hold
+      selector:
+        action: {}
+    button_3_single_click_action:
+      name: Button 3 Single Click Action
+      description: Action for Button 3 single click
+      selector:
+        action: {}
+    button_3_double_click_action:
+      name: Button 3 Double Click Action
+      description: Action for Button 3 double click
+      selector:
+        action: {}
+    button_3_triple_click_action:
+      name: Button 3 Triple Click Action
+      description: Action for Button 3 triple click
+      selector:
+        action: {}
+    button_3_hold_action:
+      name: Button 3 Hold Action
+      description: Action for Button 3 hold
+      selector:
+        action: {}
+    button_4_single_click_action:
+      name: Button 4 Single Click Action
+      description: Action for Button 4 single click
+      selector:
+        action: {}
+    button_4_double_click_action:
+      name: Button 4 Double Click Action
+      description: Action for Button 4 double click
+      selector:
+        action: {}
+    button_4_triple_click_action:
+      name: Button 4 Triple Click Action
+      description: Action for Button 4 triple click
+      selector:
+        action: {}
+    button_4_hold_action:
+      name: Button 4 Hold Action
+      description: Action for Button 4 hold
+      selector:
+        action: {}
+
+trigger:
+  - platform: event
+    event_type: zha_event
+    event_data:
+      device_id: !input zigbee_device
+
+variables:
+  button_1_single_click_action: !input button_1_single_click_action
+  button_1_double_click_action: !input button_1_double_click_action
+  button_1_triple_click_action: !input button_1_triple_click_action
+  button_1_hold_action: !input button_1_hold_action
+  button_2_single_click_action: !input button_2_single_click_action
+  button_2_double_click_action: !input button_2_double_click_action
+  button_2_triple_click_action: !input button_2_triple_click_action
+  button_2_hold_action: !input button_2_hold_action
+  button_3_single_click_action: !input button_3_single_click_action
+  button_3_double_click_action: !input button_3_double_click_action
+  button_3_triple_click_action: !input button_3_triple_click_action
+  button_3_hold_action: !input button_3_hold_action
+  button_4_single_click_action: !input button_4_single_click_action
+  button_4_double_click_action: !input button_4_double_click_action
+  button_4_triple_click_action: !input button_4_triple_click_action
+  button_4_hold_action: !input button_4_hold_action
+
+action:
+  - choose:
+      - conditions:
+          - condition: template
+            value_template: "{{ trigger.event.data.command == 'single' and trigger.event.data.endpoint_id == 1 }}"
+        sequence: !input button_1_single_click_action
+      - conditions:
+          - condition: template
+            value_template: "{{ trigger.event.data.command == 'double' and trigger.event.data.endpoint_id == 1 }}"
+        sequence: !input button_1_double_click_action
+      - conditions:
+          - condition: template
+            value_template: "{{ trigger.event.data.command == 'triple' and trigger.event.data.endpoint_id == 1 }}"
+        sequence: !input button_1_triple_click_action
+      - conditions:
+          - condition: template
+            value_template: "{{ trigger.event.data.command == 'hold' and trigger.event.data.endpoint_id == 1 }}"
+        sequence: !input button_1_hold_action
+      - conditions:
+          - condition: template
+            value_template: "{{ trigger.event.data.command == 'single' and trigger.event.data.endpoint_id == 2 }}"
+        sequence: !input button_2_single_click_action
+      - conditions:
+          - condition: template
+            value_template: "{{ trigger.event.data.command == 'double' and trigger.event.data.endpoint_id == 2 }}"
+        sequence: !input button_2_double_click_action
+      - conditions:
+          - condition: template
+            value_template: "{{ trigger.event.data.command == 'triple' and trigger.event.data.endpoint_id == 2 }}"
+        sequence: !input button_2_triple_click_action
+      - conditions:
+          - condition: template
+            value_template: "{{ trigger.event.data.command == 'hold' and trigger.event.data.endpoint_id == 2 }}"
+        sequence: !input button_2_hold_action
+      - conditions:
+          - condition: template
+            value_template: "{{ trigger.event.data.command == 'single' and trigger.event.data.endpoint_id == 3 }}"
+        sequence: !input button_3_single_click_action
+      - conditions:
+          - condition: template
+            value_template: "{{ trigger.event.data.command == 'double' and trigger.event.data.endpoint_id == 3 }}"
+        sequence: !input button_3_double_click_action
+      - conditions:
+          - condition: template
+            value_template: "{{ trigger.event.data.command == 'triple' and trigger.event.data.endpoint_id == 3 }}"
+        sequence: !input button_3_triple_click_action
+      - conditions:
+          - condition: template
+            value_template: "{{ trigger.event.data.command == 'hold' and trigger.event.data.endpoint_id == 3 }}"
+        sequence: !input button_3_hold_action
+      - conditions:
+          - condition: template
+            value_template: "{{ trigger.event.data.command == 'single' and trigger.event.data.endpoint_id == 4 }}"
+        sequence: !input button_4_single_click_action
+      - conditions:
+          - condition: template
+            value_template: "{{ trigger.event.data.command == 'double' and trigger.event.data.endpoint_id == 4 }}"
+        sequence: !input button_4_double_click_action
+      - conditions:
+          - condition: template
+            value_template: "{{ trigger.event.data.command == 'triple' and trigger.event.data.endpoint_id == 4 }}"
+        sequence: !input button_4_triple_click_action
+      - conditions:
+          - condition: template
+            value_template: "{{ trigger.event.data.command == 'hold' and trigger.event.data.endpoint_id == 4 }}"
+        sequence: !input button_4_hold_action
+    default: []

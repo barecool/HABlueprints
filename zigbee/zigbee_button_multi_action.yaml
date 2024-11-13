@@ -1,0 +1,63 @@
+blueprint:
+  name: Zigbee Button Controller
+  description: Control a fan, LED, light, light color, and fan speed using a Zigbee button with single, double, triple click, and hold actions.
+  domain: automation
+  input:
+    zigbee_button:
+      name: Zigbee Button
+      description: The Zigbee button to use
+      selector:
+        device:
+          integration: zha
+    single_click_action:
+      name: Single Click Action
+      description: Action to perform on single click
+      selector:
+        action: {}
+    double_click_action:
+      name: Double Click Action
+      description: Action to perform on double click
+      selector:
+        action: {}
+    triple_click_action:
+      name: Triple Click Action
+      description: Action to perform on triple click
+      selector:
+        action: {}
+    hold_action:
+      name: Hold Action
+      description: Action to perform on hold
+      selector:
+        action: {}
+
+trigger:
+  - platform: event
+    event_type: zha_event
+    event_data:
+      device_id: !input zigbee_button
+
+variables:
+  single_click_action: !input single_click_action
+  double_click_action: !input double_click_action
+  triple_click_action: !input triple_click_action
+  hold_action: !input hold_action
+
+action:
+  - choose:
+      - conditions:
+          - condition: template
+            value_template: "{{ trigger.event.data.command == 'single' }}"
+        sequence: !input single_click_action
+      - conditions:
+          - condition: template
+            value_template: "{{ trigger.event.data.command == 'double' }}"
+        sequence: !input double_click_action
+      - conditions:
+          - condition: template
+            value_template: "{{ trigger.event.data.command == 'triple' }}"
+        sequence: !input triple_click_action
+      - conditions:
+          - condition: template
+            value_template: "{{ trigger.event.data.command == 'hold' }}"
+        sequence: !input hold_action
+    default: []
